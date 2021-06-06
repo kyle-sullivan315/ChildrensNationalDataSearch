@@ -1,0 +1,36 @@
+Sub dataSearch()
+RowCount = 1
+RowCount1 = 1
+With Worksheets("Sheet2").Range("A2")
+    Do Until .Offset(RowCount1, 0).value = ""
+    searchValue = UCase(.Offset(RowCount1, 0).value)
+    DOE = UCase(.Offset(RowCount1, 2).value)
+    Ageraw = UCase(.Offset(RowCount1, 3).value)
+    Age = Trunc(Ageraw, 0)
+    With Worksheets("Sheet1").Range("A2")
+        RowCount = 1
+        Do Until .Offset(RowCount, 0).value = ""
+            If UCase(.Offset(RowCount, 0).value) = searchValue Then
+                If UCase(.Offset(RowCount, 1).value) = DOE Then
+                    found_age = UCase(.Offset(RowCount, 2).value)
+                    search_age = Trunc(found_age, 0)
+                    If search_age = Age Then
+                        score1 = UCase(.Offset(RowCount, 4).value)
+                        score2 = UCase(.Offset(RowCount, 5).value)
+                        score3 = UCase(.Offset(RowCount, 6).value)
+                        
+                        With Worksheets("Sheet2").Range("A2")
+                            .Offset(RowCount1, 5).value = score1
+                            .Offset(RowCount1, 6).value = score2
+                            .Offset(RowCount1, 7).value = score3
+                        End With
+                    End If
+                End If
+            End If
+            RowCount = RowCount + 1
+        Loop
+    RowCount1 = RowCount1 + 1
+    End With
+    Loop
+    End With
+End Sub
